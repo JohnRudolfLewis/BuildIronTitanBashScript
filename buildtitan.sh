@@ -145,7 +145,7 @@ function summonVillagers {
    done
 }
 
-function buildGolomChute {
+function buildGolemChute {
    # drop shaft
    fill -2 0 16 2 -19 16 stained_glass 0 replace
    fill -2 -1 12 2 -19 12 stained_glass 0 replace
@@ -171,6 +171,10 @@ function buildGolomChute {
    setblock 1 -18 13 flowing_lava
    setblock -1 -18 13 flowing_lava
 
+} 
+
+function buildGolemDropHandler {
+
    # hoppers under lava
    setblock 0 -21 13 hopper 2
    setblock 0 -21 14 hopper 2
@@ -184,7 +188,7 @@ function buildGolomChute {
    
    # sorter
    setblock 0 -21 12 hopper 2
-   setblock 0 -22 12 hopper 3
+   setblock 0 -22 12 hopper 3 replace "{Items:[{id:265,Count:64,Slot:0},{id:42,Count:1,Slot:1,tag:{display:{Name:SorterItem}}},{id:42,Count:1,Slot:2,tag:{display:{Name:SorterItem}}},{id:42,Count:1,Slot:3,tag:{display:{Name:SorterItem}}},{id:42,Count:1,Slot:4,tag:{display:{Name:SorterItem}}}]}"
    setblock 0 -23 12 hopper 2
    setblock 0 -23 13 iron_block
    setblock 0 -23 14 iron_block
@@ -198,7 +202,29 @@ function buildGolomChute {
    setblock 0 -23 16 redstone_wire
    setblock 0 -24 15 unpowered_repeater 
    setblock 0 -24 13 redstone_torch 4 
-} 
+   
+   # item splitter
+   setblock 0 -23 11 hopper
+   setblock -2 -25 11 iron_block
+   setblock -1 -25 11 hopper
+   setblock 0 -25 11 iron_block
+   setblock 1 -25 11 hopper
+   setblock 2 -25 11 iron_block
+   setblock -2 -24 11 iron_block
+   setblock -1 -24 11 golden_rail
+   setblock 0 -24 11 golden_rail
+   setblock 1 -24 11 golden_rail
+   setblock 2 -24 11 iron_block
+   summon MinecartHopper 1 -24 11
+   setblock -3 -24 11 lever 2
+   setblock 2 -26 11 hopper 2
+   setblock 1 -26 11 hopper 5
+   setblock 0 -26 11 iron_block
+   setblock -1 -26 11 hopper 4
+   setblock -2 -26 11 hopper 2
+
+   
+}
 
 function fill {
    sendkeys "fill $[oX+$1] $[oY+$2] $[oZ+$3] $[oX+$4] $[oY+$5] $[oZ+$6] $7 $8 $9"
@@ -216,6 +242,10 @@ function setblock {
 #buildCenterCover
 #buildVillagerPens
 #summonVillagers
-buildGolomChute
+#buildGolemChute
+buildGolemDropHandler
+
+
+
 sendkeys "me Finished building the Iron Titan"
 echo AllDone
