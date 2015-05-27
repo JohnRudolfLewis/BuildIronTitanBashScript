@@ -203,7 +203,7 @@ function buildGolemDropHandler {
    setblock 0 -24 15 unpowered_repeater 
    setblock 0 -24 13 redstone_torch 4 
    
-   # item splitter
+   # ingot splitter
    setblock 0 -23 11 hopper
    setblock -2 -25 11 iron_block
    setblock -1 -25 11 hopper
@@ -223,8 +223,55 @@ function buildGolemDropHandler {
    setblock -1 -26 11 hopper 4
    setblock -2 -26 11 hopper 2
 
+   # nether spitter
+   setblock 0 -21 11 hopper 2
+   setblock 0 -21 10 hopper 2
+
+   # hoppers leading up to dispenser
+   setblock 0 -21 11 hopper 2 
+   setblock 0 -21 10 hopper 2
+   setblock 0 -21 9 hopper 2
+   setblock 0 -21 8 hopper 2
+   setblock 0 -21 7 hopper 2
+   setblock 0 -21 6 hopper 2
+   setblock 0 -21 5 hopper 2
+   setblock 0 -21 4 hopper 0
+   setblock 0 -22 4 hopper 2 
+   setblock 0 -22 3 dispenser 2
    
+   # platform and redstone for dispenser
+   fill -3 -23 3 3 -23 5 iron_block 0 replace 
+   setblock -1 -22 3 iron_block
+   setblock 1 -22 3 iron_block
+   setblock 2 -22 3 unpowered_repeater 3 replace
+   setblock 2 -22 5 unpowered_repeater 3 replace
+   setblock 1 -22 4 unpowered_comparator 1 replace
+   setblock 3 -22 3 redstone_wire
+   setblock 3 -22 4 redstone_wire
+   setblock 3 -22 5 redstone_wire
+   setblock 2 -22 4 redstone_wire
+   setblock 1 -22 5 redstone_wire 
+
+   fill -3 -26 2 3 -26 4 iron_block 0 replace
+   setblock -3 -26 4 iron_block 0 replace
+   setblock 3 -26 4 iron_block 0 replace
+   
+   setblock 2 -25 3 sticky_piston 4 replace
+   setblock -1 -25 3 sticky_piston 5 replace
+   setblock 0 -25 3 redstone_block 0 replace
+
+   setblock 3 -25 3 redstone_wire
+   setblock -2 -25 3 redstone_wire
+   setblock 0 -25 4 hopper 5 replace
+   setblock 1 -25 4 hopper 4 replace "{Items:[{id:265,Count:32,Slot:0}]}"
+   setblock 2 -25 4 unpowered_comparator 1 replace
+   setblock -1 -25 4 unpowered_comparator 3 replace
+   setblock -2 -25 4 iron_block
+   setblock 3 -25 4 iron_block
+   setblock 3 -24 4 unlit_redstone_torch
 }
+
+
 
 function fill {
    sendkeys "fill $[oX+$1] $[oY+$2] $[oZ+$3] $[oX+$4] $[oY+$5] $[oZ+$6] $7 $8 $9"
@@ -243,7 +290,26 @@ function setblock {
 #buildVillagerPens
 #summonVillagers
 #buildGolemChute
-buildGolemDropHandler
+#buildGolemDropHandler
+
+
+   # item elevator
+   setblock -2 -26 10 hopper 2
+   setblock -2 -26 9 hopper 2
+   setblock -2 -26 8 hopper 2
+   setblock -2 -26 7 dispenser 4 replace
+   setblock -3 -27 7 packed_ice
+   setblock -4 -27 7 packed_ice
+   setblock -4 -27 8 iron_block
+   setblock -4 -27 9 iron_block
+   setblock -4 -27 10 packed_ice
+   setblock -4 -27 11 packed_ice
+   setblock -4 -27 12 packed_ice
+   setblock -4 -27 13 packed_ice
+   setblock -4 -27 14 iron_block
+   setblock -3 -26 6 iron_block
+   setblock -4 -26 6 iron_block
+   setblock -5 -26 6 iron_block
 
 
 
