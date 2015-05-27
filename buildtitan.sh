@@ -17,7 +17,7 @@ function sendkeys {
 
 function clearAllBlocks {
    sendkeys "me Clearing away the area"
-   for ((Y = -20; Y < 11; Y++))
+   for ((Y = -27; Y < 11; Y++))
    do 
       fill -66 $Y -16 22 $Y 16 air 0 replace
       #fill 0 $Y -16 22 $Y 15 air 0 replace
@@ -269,7 +269,125 @@ function buildGolemDropHandler {
    setblock -2 -25 4 iron_block
    setblock 3 -25 4 iron_block
    setblock 3 -24 4 unlit_redstone_torch
+   
+   # item elevator
+   setblock -2 -26 10 hopper 2
+   setblock -2 -26 9 hopper 2
+   setblock -2 -26 8 hopper 2
+   setblock -3 -27 7 packed_ice
+   setblock -4 -27 7 packed_ice
+   setblock -4 -27 8 iron_block
+   setblock -4 -27 9 iron_block
+   setblock -4 -27 10 packed_ice
+   setblock -4 -27 11 packed_ice
+   setblock -4 -27 12 packed_ice
+   setblock -4 -27 13 packed_ice
+   setblock -4 -27 14 iron_block
+   setblock -3 -26 6 iron_block
+   setblock -4 -26 6 iron_block
+   setblock -5 -26 6 iron_block
+   setblock -5 -26 7 iron_block
+   setblock -5 -26 8 iron_block
+   setblock -5 -26 9 iron_block
+   setblock -5 -26 10 iron_block
+   setblock -5 -26 11 iron_block
+   setblock -5 -26 12 iron_block
+   setblock -3 -26 8 iron_block
+   setblock -3 -26 9 iron_block
+   setblock -3 -26 10 iron_block
+   setblock -3 -26 11 iron_block
+   setblock -3 -26 12 iron_block
+   setblock -3 -26 14 iron_block
+   setblock -5 -26 14 iron_block
+   setblock -3 -26 15 iron_block
+   setblock -4 -26 15 iron_block
+   setblock -5 -26 15 iron_block
+   setblock -4 -26 14 fence
+   setblock -4 -26 13 fence
+   setblock -5 -26 13 stained_glass
+   setblock -3 -26 13 stained_glass
+   setblock -3 -25 7 stained_glass
+   setblock -4 -25 7 stained_glass
+   setblock -4 -25 8 stained_glass
+   setblock -4 -25 9 stained_glass
+   setblock -4 -25 10 stained_glass
+   setblock -4 -25 11 stained_glass
+   setblock -4 -25 12 stained_glass
+
+   setblock 2 -26 10 hopper 2
+   setblock 2 -26 9 hopper 2
+   setblock 2 -26 8 hopper 2
+   setblock 3 -27 7 packed_ice
+   setblock 4 -27 7 packed_ice
+   setblock 4 -27 8 iron_block
+   setblock 4 -27 9 iron_block
+   setblock 4 -27 10 packed_ice
+   setblock 4 -27 11 packed_ice
+   setblock 4 -27 12 packed_ice
+   setblock 4 -27 13 packed_ice
+   setblock 4 -27 14 iron_block
+   setblock 3 -26 6 iron_block
+   setblock 4 -26 6 iron_block
+   setblock 5 -26 6 iron_block
+   setblock 5 -26 7 iron_block
+   setblock 5 -26 8 iron_block
+   setblock 5 -26 9 iron_block
+   setblock 5 -26 10 iron_block
+   setblock 5 -26 11 iron_block
+   setblock 5 -26 12 iron_block
+   setblock 3 -26 8 iron_block
+   setblock 3 -26 9 iron_block
+   setblock 3 -26 10 iron_block
+   setblock 3 -26 11 iron_block
+   setblock 3 -26 12 iron_block
+   setblock 3 -26 14 iron_block
+   setblock 5 -26 14 iron_block
+   setblock 3 -26 15 iron_block
+   setblock 4 -26 15 iron_block
+   setblock 5 -26 15 iron_block
+   setblock 4 -26 14 fence
+   setblock 4 -26 13 fence
+   setblock 5 -26 13 stained_glass
+   setblock 3 -26 13 stained_glass
+   setblock 3 -25 7 stained_glass
+   setblock 4 -25 7 stained_glass
+   setblock 4 -25 8 stained_glass
+   setblock 4 -25 9 stained_glass
+   setblock 4 -25 10 stained_glass
+   setblock 4 -25 11 stained_glass
+   setblock 4 -25 12 stained_glass
+   
+   fill -2 -27 5 2 -27 7 iron_block
+   setblock 0 -26 7 iron_block
+   setblock -1 -26 7 unpowered_comparator 5 replace
+   setblock 1 -26 7 unpowered_comparator 3 replace
+   setblock -2 -26 7 dispenser 4 replace
+   setblock 2 -26 7 dispenser 5 replace
+
+   setblock 0 -26 6 unpowered_repeater 0 replace 
+   setblock -2 -26 6 unpowered_repeater 2 replace
+   setblock 2 -26 6 unpowered_repeater 2 replace 
+   setblock -1 -26 6 redstone_wire
+   setblock 1 -26 6 redstone_wire
+   setblock -2 -26 5 redstone_wire 
+   setblock -1 -26 5 redstone_wire
+   setblock 0 -26 5 redstone_wire
+   setblock 1 -26 5 redstone_wire
+   setblock 2 -26 5 redstone_wire
+
+ 
+   setblock -3 -26 7 flowing_water
+   setblock 3 -26 7 flowing_water
+   
+   fill 3 -25 13 5 -1 15 stained_glass 0
+   fill -3 -25 13 -5 -1 15 stained_glass 0
+   
+   # portal
+   fill -2 -25 2 2 -21 2 obsidian
+   fill -1 -24 2 1 -22 2 portal
+   fill -2 -25 1 2 -21 1 iron_block
 }
+
 
 
 
@@ -283,6 +401,63 @@ function setblock {
 }
 
 
+function placedoor {
+   setblock $1 $2 $3 wooden_door 0 replace
+   setblock $1 $[1+$2] $3 wooden_door 8 replace
+}
+
+function removedoor {
+   setblock $1 $2 $3 air
+   setblock $1 $[1+$2] $3 air
+}
+
+function createvillage {
+   placedoor $[$1+5] $2 $[$3-1]
+   sleep $4
+   placedoor $[$1-64] $2 $3
+   sleep $4  
+   placedoor $[$1-33] $2 $3
+   sleep $4  
+   removedoor $[$1-64] $2 $3
+   sleep $4
+   placedoor $[$1-17] $2 $3
+   sleep $4  
+   removedoor $[$1-33] $2 $3
+   sleep $4
+   placedoor $[$1-9] $2 $3
+   sleep $4  
+   removedoor $[$1-17] $2 $3
+   sleep $4
+   placedoor $[$1-5] $2 $3
+   sleep $4  
+   removedoor $[$1-9] $2 $3
+   sleep $4
+   placedoor $[$1-3] $2 $3
+   sleep $4  
+   removedoor $[$1-5] $2 $3
+   sleep $4
+   placedoor $[$1-1] $2 $3
+   sleep $4  
+   removedoor $[$1-3] $2 $3
+   sleep $4
+   placedoor $[$1-0] $2 $3
+   sleep $4  
+   removedoor $[$1-1] $2 $3
+   sleep $4
+   removedoor $[$1+5] $2 $[$3-1]
+   sleep $4
+}
+
+function createvilages {
+   for ((z = -16; z < 16; z++))
+   do
+      createvillage 0 $1 $z 0.1
+   done
+}
+createvilages 1
+
+#createvillage 0 1 -16 0.1
+
 #clearAllBlocks
 #buildLowerPlatform
 #buildLowerCover
@@ -291,25 +466,6 @@ function setblock {
 #summonVillagers
 #buildGolemChute
 #buildGolemDropHandler
-
-
-   # item elevator
-   setblock -2 -26 10 hopper 2
-   setblock -2 -26 9 hopper 2
-   setblock -2 -26 8 hopper 2
-   setblock -2 -26 7 dispenser 4 replace
-   setblock -3 -27 7 packed_ice
-   setblock -4 -27 7 packed_ice
-   setblock -4 -27 8 iron_block
-   setblock -4 -27 9 iron_block
-   setblock -4 -27 10 packed_ice
-   setblock -4 -27 11 packed_ice
-   setblock -4 -27 12 packed_ice
-   setblock -4 -27 13 packed_ice
-   setblock -4 -27 14 iron_block
-   setblock -3 -26 6 iron_block
-   setblock -4 -26 6 iron_block
-   setblock -5 -26 6 iron_block
 
 
 
