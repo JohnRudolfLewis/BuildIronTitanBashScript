@@ -5,6 +5,8 @@ oX=0
 oY=150
 oZ=285
 
+# door sleep time
+doorsleep=15
 
 function sendkeys {
    # replace this with whatever command it takes on your server to send keys to 
@@ -403,6 +405,7 @@ function setblock {
 
 function placedoor {
    setblock $1 $2 $3 wooden_door 0 replace
+   sleep 0.5
    setblock $1 $[1+$2] $3 wooden_door 8 replace
 }
 
@@ -411,62 +414,77 @@ function removedoor {
    setblock $1 $[1+$2] $3 air
 }
 
+function placedoorstrip {
+   for ((z = -16; z < 16; z++))
+   do
+      placedoor $1 $2 $z
+      sleep $doorsleep
+   done
+}
+
 function createvillage {
    placedoor $[$1+5] $2 $[$3-1]
-   sleep $4
+   sleep $doorsleep
    placedoor $[$1-64] $2 $3
-   sleep $4  
+   sleep $doorsleep
    placedoor $[$1-33] $2 $3
-   sleep $4  
+   sleep $doorsleep
    removedoor $[$1-64] $2 $3
-   sleep $4
+   sleep $doorsleep
    placedoor $[$1-17] $2 $3
-   sleep $4  
+   sleep $doorsleep
    removedoor $[$1-33] $2 $3
-   sleep $4
+   sleep $doorsleep
    placedoor $[$1-9] $2 $3
-   sleep $4  
+   sleep $doorsleep
    removedoor $[$1-17] $2 $3
-   sleep $4
+   sleep $doorsleep
    placedoor $[$1-5] $2 $3
-   sleep $4  
+   sleep $doorsleep
    removedoor $[$1-9] $2 $3
-   sleep $4
+   sleep $doorsleep
    placedoor $[$1-3] $2 $3
-   sleep $4  
+   sleep $doorsleep  
    removedoor $[$1-5] $2 $3
-   sleep $4
+   sleep $doorsleep
    placedoor $[$1-1] $2 $3
-   sleep $4  
+   sleep $doorsleep  
    removedoor $[$1-3] $2 $3
-   sleep $4
+   sleep $doorsleep
    placedoor $[$1-0] $2 $3
-   sleep $4  
+   sleep $doorsleep
    removedoor $[$1-1] $2 $3
-   sleep $4
+   sleep $doorsleep
    removedoor $[$1+5] $2 $[$3-1]
-   sleep $4
+   sleep $doorsleep
 }
 
 function createvilages {
    for ((z = -16; z < 16; z++))
    do
-      createvillage 0 $1 $z 0.1
+      createvillage 0 $1 $z
    done
 }
+
+function expandvilages {
+   for x in 1 3 5 7 9 10 11 12 13 14 15 16 17 18 19 20
+   do
+      placedoorstrip $x $1
+      placedoorstrip $[0 - $x] $1
+   done
+}
+
+
+clearAllBlocks
+buildLowerPlatform
+buildLowerCover
+buildCenterCover
+buildVillagerPens
+summonVillagers
+buildGolemChute
+buildGolemDropHandler
 createvilages 1
-
-#createvillage 0 1 -16 0.1
-
-#clearAllBlocks
-#buildLowerPlatform
-#buildLowerCover
-#buildCenterCover
-#buildVillagerPens
-#summonVillagers
-#buildGolemChute
-#buildGolemDropHandler
-
+expandvilages 1
 
 
 sendkeys "me Finished building the Iron Titan"
