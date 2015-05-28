@@ -6,7 +6,7 @@ oY=150
 oZ=285
 
 # door sleep time
-doorsleep=15
+doorsleep=0
 
 function sendkeys {
    # replace this with whatever command it takes on your server to send keys to 
@@ -16,18 +16,17 @@ function sendkeys {
    sleep .25
 }
 
-
 function clearAllBlocks {
    sendkeys "me Clearing away the area"
    for ((Y = -27; Y < 11; Y++))
    do 
-      fill -66 $Y -16 22 $Y 16 air 0 replace
+      fill -66 $Y -26 22 $Y 25 air 0 replace
       #fill 0 $Y -16 22 $Y 15 air 0 replace
    done
 }
 
 function buildLowerPlatform {
-   sendkeys "me Building the lower platform"
+   sendkeys "me Building the door platform"
    # fill the temporary center platform
    fill -9 0 -16 9 0 15 cobblestone 0 replace
    # add stripes to the temporary center platform
@@ -52,36 +51,55 @@ function buildLowerPlatform {
    fill -64 0 -16 -64 0 15 cobblestone 0 replace
 }
 
-function buildLowerCover {
-   sendkeys "me Building the lower cover"
+function buildUpperPlatform {
+   fill 20 4 -16 -20 4 -1 stone 0 replace
+   fill 20 4 1 -20 4 15 stone 0 replace
+   fill 8 4 0 -8 4 0 stone 0 replace
+   fill 12 4 0 20 4 0 stone 0 replace
+   fill -12 4 0 -20 4 0 stone 0 replace
+   
+   # fill the center block
+   setblock 0 4 0 iron_block
+
+   # fill the western strips
+   fill -33 4 -16 -33 4 15 cobblestone 0 replace
+   fill -64 4 -16 -64 4 15 cobblestone 0 replace
+
+   # remove lower overhang
+   fill 22 3 -16 21 3 15 air 0 replace
+   fill -21 3 -16 -21 3 15 air 0 replace
+}
+
+function buildCover {
+   sendkeys "me Building the cover"
    
    # western cover
-   fill -21 3 -16 -10 3 15 stone 0 replace
-   fill -13 3 -16 -12 3 15 glass 0 replace
+   fill -21 $1 -16 -10 $1 15 stone 0 replace
+   fill -13 $1 -16 -12 $1 15 glass 0 replace
 
    # eastern cover
-   fill 10 3 -16 22 3 15 stone
-   fill 11 3 -16 12 3 15 glass
+   fill 10 $1 -16 22 $1 15 stone
+   fill 11 $1 -16 12 $1 15 glass
 
    # western strip covers
-   fill -33 3 -16 -34 3 15 cobblestone 
-   fill -64 3 -16 -65 3 15 cobblestone
+   fill -33 $1 -16 -34 $1 15 cobblestone 
+   fill -64 $1 -16 -65 $1 15 cobblestone
 
    # sea lanterns
    for ((Z = 14; Z >= -14; Z -= 4))
    do
-      setblock -11 3 $Z sea_lantern
-      setblock -14 3 $Z sea_lantern
-      setblock -18 3 $Z sea_lantern
-      setblock -7 3 $Z sea_lantern
-      setblock -2 3 $Z sea_lantern
-      setblock 2 3 $Z sea_lantern
-      setblock 6 3 $Z sea_lantern
-      setblock 10 3 $Z sea_lantern
-      setblock 14 3 $Z sea_lantern
-      setblock 18 3 $Z sea_lantern
-      setblock -35 3 $Z sea_lantern
-      setblock -66 3 $Z sea_lantern
+      setblock -11 $1 $Z sea_lantern
+      setblock -14 $1 $Z sea_lantern
+      setblock -18 $1 $Z sea_lantern
+      setblock -7 $1 $Z sea_lantern
+      setblock -2 $1 $Z sea_lantern
+      setblock 2 $1 $Z sea_lantern
+      setblock 6 $1 $Z sea_lantern
+      setblock 10 $1 $Z sea_lantern
+      setblock 14 $1 $Z sea_lantern
+      setblock 18 $1 $Z sea_lantern
+      setblock -35 $1 $Z sea_lantern
+      setblock -66 $1 $Z sea_lantern
    done
 }
 
@@ -149,10 +167,10 @@ function summonVillagers {
 
 function buildGolemChute {
    # drop shaft
-   fill -2 0 16 2 -19 16 stained_glass 0 replace
-   fill -2 -1 12 2 -19 12 stained_glass 0 replace
-   fill -2 -1 16 -2 -20 12 iron_block 0 replace
-   fill 2 -1 16 2 -20 12 iron_block 0 replace
+   fill -2 -3 16 2 -19 16 stained_glass 0 replace
+   fill -2 -3 12 2 -19 12 stained_glass 0 replace
+   fill -2 -3 16 -2 -20 12 iron_block 0 replace
+   fill 2 -3 16 2 -20 12 iron_block 0 replace
    fill -2 -20 16 2 -20 16 iron_block
    fill -2 -20 12 2 -20 12 iron_block
 
@@ -381,8 +399,8 @@ function buildGolemDropHandler {
    setblock -3 -26 7 flowing_water
    setblock 3 -26 7 flowing_water
    
-   fill 3 -25 13 5 -1 15 stained_glass 0
-   fill -3 -25 13 -5 -1 15 stained_glass 0
+   fill 3 -25 13 5 -3 15 stained_glass 0
+   fill -3 -25 13 -5 -3 15 stained_glass 0
    
    # portal
    fill -2 -25 2 2 -21 2 obsidian
@@ -405,13 +423,13 @@ function setblock {
 
 function placedoor {
    setblock $1 $2 $3 wooden_door 0 replace
-   sleep 0.5
+   sleep 0.1
    setblock $1 $[1+$2] $3 wooden_door 8 replace
 }
 
 function removedoor {
    setblock $1 $2 $3 air
-   setblock $1 $[1+$2] $3 air
+   #setblock $1 $[1+$2] $3 air
 }
 
 function placedoorstrip {
@@ -474,18 +492,158 @@ function expandvilages {
    done
 }
 
+function clearinnerdoors {
+   fill 9 $1 -16 -9 $[1+$1] 15 air 0 replace
+}
+
+function createlowervillages {
+   createvilages 1
+   expandvilages 1
+   clearinnerdoors 1
+}
+
+function createuppervillages {
+   createvilages 5
+   expandvilages 5
+   clearinnerdoors 5
+}
+
+function repositionvillagerpens {
+   setblock 10 4 -1 stone 0 replace
+   setblock 10 4 1 stone 0 replace
+   setblock 11 4 0 stone 0 replace
+   setblock -10 4 -1 stone 0 replace
+   setblock -10 4 1 stone 0 replace
+   setblock -11 4 0 stone 0 replace
+
+   setblock 9 4 0 stone_slab 8 replace
+   setblock -9 4 0 stone_slab 8 replace
+
+   setblock 8 4 0 stained_glass 0 replace
+   setblock -8 4 0 stained_glass 0 replace
+
+   setblock 10 3 0 carpet 0 replace
+   setblock -10 3 0 carpet 0 replace
+
+   setblock 7 4 0 piston 5 replace
+   setblock -7 4 0 piston 4 replace
+
+   setblock 10 4 0 air 0 replace
+   setblock -10 4 0 air 0 replace
+
+   setblock 6 4 0 redstone_block 0 replace
+   setblock -6 4 0 redstone_block 0 replace
+
+   setblock 6 4 0 air 0 replace
+   setblock -6 4 0 air 0 replace
+   setblock 7 4 0 air 0 replace
+   setblock -7 4 0 air 0 replace
+
+   setblock 9 3 0 stained_glass 0 replace
+   setblock -9 3 0 stained_glass 0 replace
+   fill 9 5 -1 11 7 1 air 0 replace
+   fill -9 5 -1 -11 7 1 air 0 replace
+}
+
+function createspawnplatforms {
+   # clear out temporary blocks
+   fill -9 0 -25 9 10 24 air 0 replace
+
+   # platforms
+   fill -9 5 -24 9 5 23 stone_slab 8 replace
+   fill -9 1 -24 9 1 23 stone_slab 8 replace
+   fill -9 -3 -24 9 -3 23 stone_slab 8 replace
+
+   # hole
+   fill -1 -3 -16 1 5 15 air 0 replace
+
+   # rails
+   fill -10 -2 -17 -10 -2 -25 stone 0 replace
+   fill -10 -2 -25 10 -2 -25 stone 0 replace
+   fill 10 -2 -17 10 -2 -25 stone 0 replace
+   fill 10 -2 -17 10 -2 -25 stone 0 replace
+   
+   fill -10 2 -17 -10 2 -25 stone 0 replace
+   fill -10 2 -25 10 2 -25 stone 0 replace
+   fill 10 2 -17 10 2 -25 stone 0 replace
+   fill 10 2 -17 10 2 -25 stone 0 replace
+
+   fill -10 6 -17 -10 6 -25 stone 0 replace
+   fill -10 6 -25 10 6 -25 stone 0 replace
+   fill 10 6 -17 10 6 -25 stone 0 replace
+   fill 10 6 -17 10 6 -25 stone 0 replace
+
+
+   fill -10 -2 16 -10 -2 24 stone 0 replace
+   fill -10 -2 24 10 -2 24 stone 0 replace
+   fill 10 -2 16 10 -2 24 stone 0 replace
+   fill 10 -2 16 10 -2 24 stone 0 replace
+   
+   fill -10 2 16 -10 2 24 stone 0 replace
+   fill -10 2 24 10 2 24 stone 0 replace
+   fill 10 2 16 10 2 24 stone 0 replace
+   fill 10 2 16 10 2 24 stone 0 replace
+
+   fill -10 6 16 -10 6 24 stone 0 replace
+   fill -10 6 24 10 6 24 stone 0 replace
+   fill 10 6 16 10 6 24 stone 0 replace
+   fill 10 6 16 10 6 24 stone 0 replace
+
+   setblock -10 -1 -25 iron_bars 0 replace
+   setblock -9 -1 -25 iron_bars 0 replace
+   setblock -10 -1 -24 iron_bars 0 replace
+   setblock 10 -1 -25 iron_bars 0 replace
+   setblock 9 -1 -25 iron_bars 0 replace
+   setblock 10 -1 -24 iron_bars 0 replace
+   setblock -10 -1 24 iron_bars 0 replace
+   setblock -9 -1 24 iron_bars 0 replace
+   setblock -10 -1 23 iron_bars 0 replace
+   setblock 10 -1 24 iron_bars 0 replace
+   setblock 9 -1 24 iron_bars 0 replace
+   setblock 10 -1 23 iron_bars 0 replace
+
+   setblock -10 3 -25 iron_bars 0 replace
+   setblock -9 3 -25 iron_bars 0 replace
+   setblock -10 3 -24 iron_bars 0 replace
+   setblock 10 3 -25 iron_bars 0 replace
+   setblock 9 3 -25 iron_bars 0 replace
+   setblock 10 3 -24 iron_bars 0 replace
+   setblock -10 3 24 iron_bars 0 replace
+   setblock -9 3 24 iron_bars 0 replace
+   setblock -10 3 23 iron_bars 0 replace
+   setblock 10 3 24 iron_bars 0 replace
+   setblock 9 3 24 iron_bars 0 replace
+   setblock 10 3 23 iron_bars 0 replace
+
+   setblock -10 7 -25 iron_bars 0 replace
+   setblock -9 7 -25 iron_bars 0 replace
+   setblock -10 7 -24 iron_bars 0 replace
+   setblock 10 7 -25 iron_bars 0 replace
+   setblock 9 7 -25 iron_bars 0 replace
+   setblock 10 7 -24 iron_bars 0 replace
+   setblock -10 7 24 iron_bars 0 replace
+   setblock -9 7 24 iron_bars 0 replace
+   setblock -10 7 23 iron_bars 0 replace
+   setblock 10 7 24 iron_bars 0 replace
+   setblock 9 7 24 iron_bars 0 replace
+   setblock 10 7 23 iron_bars 0 replace
+}
+
 
 clearAllBlocks
 buildLowerPlatform
-buildLowerCover
+buildCover 3
 buildCenterCover
 buildVillagerPens
 summonVillagers
 buildGolemChute
 buildGolemDropHandler
-createvilages 1
-expandvilages 1
-
+createlowervillages
+repositionvillagerpens
+buildCover 7
+buildUpperPlatform
+createuppervillages
+createspawnplatforms
 
 sendkeys "me Finished building the Iron Titan"
 echo AllDone
