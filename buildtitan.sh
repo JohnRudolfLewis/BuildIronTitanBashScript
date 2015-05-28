@@ -6,7 +6,7 @@ oY=150
 oZ=285
 
 # door sleep time
-doorsleep=0
+doorsleep=10
 
 function sendkeys {
    # replace this with whatever command it takes on your server to send keys to 
@@ -235,8 +235,8 @@ function buildGolemDropHandler {
    setblock 0 -24 11 golden_rail
    setblock 1 -24 11 golden_rail
    setblock 2 -24 11 iron_block
-   summon MinecartHopper 1 -24 11
-   setblock -3 -24 11 lever 2
+   summon MinecartHopper 1 -24 11 "{Motion:[1.0,0.0,0.0]}"
+   setblock -3 -24 11 lever 10
    setblock 2 -26 11 hopper 2
    setblock 1 -26 11 hopper 5
    setblock 0 -26 11 iron_block
@@ -248,15 +248,15 @@ function buildGolemDropHandler {
    setblock 0 -21 10 hopper 2
 
    # hoppers leading up to dispenser
-   setblock 0 -21 11 hopper 2 
-   setblock 0 -21 10 hopper 2
-   setblock 0 -21 9 hopper 2
-   setblock 0 -21 8 hopper 2
-   setblock 0 -21 7 hopper 2
-   setblock 0 -21 6 hopper 2
-   setblock 0 -21 5 hopper 2
-   setblock 0 -21 4 hopper 0
-   setblock 0 -22 4 hopper 2 
+   setblock 0 -21 11 hopper 2 "{Items:[{Slot:0,id:red_flower,Count:64},{Slot:1,id:red_flower,Count:64},{Slot:2,id:red_flower,Count:64},{Slot:3,id:red_flower,Count:64},{Slot:4,id:red_flower,Count:64}]}"
+   setblock 0 -21 10 hopper 2 "{Items:[{Slot:0,id:red_flower,Count:64},{Slot:1,id:red_flower,Count:64},{Slot:2,id:red_flower,Count:64},{Slot:3,id:red_flower,Count:64},{Slot:4,id:red_flower,Count:64}]}"
+   setblock 0 -21 9 hopper 2 "{Items:[{Slot:0,id:red_flower,Count:64},{Slot:1,id:red_flower,Count:64},{Slot:2,id:red_flower,Count:64},{Slot:3,id:red_flower,Count:64},{Slot:4,id:red_flower,Count:64}]}"
+   setblock 0 -21 8 hopper 2 "{Items:[{Slot:0,id:red_flower,Count:64},{Slot:1,id:red_flower,Count:64},{Slot:2,id:red_flower,Count:64},{Slot:3,id:red_flower,Count:64},{Slot:4,id:red_flower,Count:64}]}"
+   setblock 0 -21 7 hopper 2 "{Items:[{Slot:0,id:red_flower,Count:64},{Slot:1,id:red_flower,Count:64},{Slot:2,id:red_flower,Count:64},{Slot:3,id:red_flower,Count:64},{Slot:4,id:red_flower,Count:64}]}"
+   setblock 0 -21 6 hopper 2 "{Items:[{Slot:0,id:red_flower,Count:64},{Slot:1,id:red_flower,Count:64},{Slot:2,id:red_flower,Count:64},{Slot:3,id:red_flower,Count:64},{Slot:4,id:red_flower,Count:64}]}"
+   setblock 0 -21 5 hopper 2 "{Items:[{Slot:0,id:red_flower,Count:64},{Slot:1,id:red_flower,Count:64},{Slot:2,id:red_flower,Count:64},{Slot:3,id:red_flower,Count:64},{Slot:4,id:red_flower,Count:64}]}"
+   setblock 0 -21 4 hopper 0 "{Items:[{Slot:0,id:red_flower,Count:64},{Slot:1,id:red_flower,Count:64},{Slot:2,id:red_flower,Count:64},{Slot:3,id:red_flower,Count:64},{Slot:4,id:red_flower,Count:64}]}"
+   setblock 0 -22 4 hopper 2  "{Items:[{Slot:0,id:red_flower,Count:64},{Slot:1,id:red_flower,Count:64},{Slot:2,id:red_flower,Count:64},{Slot:3,id:red_flower,Count:64},{Slot:4,id:red_flower,Count:64}]}"
    setblock 0 -22 3 dispenser 2
    
    # platform and redstone for dispenser
@@ -627,23 +627,68 @@ function createspawnplatforms {
    setblock 10 7 24 iron_bars 0 replace
    setblock 9 7 24 iron_bars 0 replace
    setblock 10 7 23 iron_bars 0 replace
+
+   setblock -9 -2 -24 stone 0 replace
+   setblock 9 -2 -24 stone 0 replace
+   setblock -9 -2 23 stone 0 replace
+   setblock 9 -2 23 stone 0 replace
+   setblock -9 2 -24 stone 0 replace
+   setblock 9 2 -24 stone 0 replace
+   setblock -9 2 23 stone 0 replace
+   setblock 9 2 23 stone 0 replace
+   setblock -9 6 -24 stone 0 replace
+   setblock 9 6 -24 stone 0 replace
+   setblock -9 6 23 stone 0 replace
+   setblock 9 6 23 stone 0 replace
+
+   setblock -9 -1 -24 flowing_water 0 replace
+   setblock 9 -1 -24 flowing_water 0 replace
+   setblock -9 -1 23 flowing_water 0 replace
+   setblock 9 -1 23 flowing_water 0 replace
+   setblock -9 3 -24 flowing_water 0 replace
+   setblock 9 3 -24 flowing_water 0 replace
+   setblock -9 3 23 flowing_water 0 replace
+   setblock 9 3 23 flowing_water 0 replace
+   setblock -9 7 -24 flowing_water 0 replace
+   setblock 9 7 -24 flowing_water 0 replace
+   setblock -9 7 23 flowing_water 0 replace
+   setblock 9 7 23 flowing_water 0 replace
+
+   fill -7 -2 -24 7 -2 -24 flowing_water 0 replace
+   fill -7 2 -24 7 2 -24 flowing_water 0 replace
+   fill -7 6 -24 7 6 -24 flowing_water 0 replace
+   fill -7 -2 23 7 -2 -24 flowing_water 0 replace
+   fill -7 2 23 7 2 -24 flowing_water 0 replace
+   fill -7 6 23 7 6 -24 flowing_water 0 replace
+   
+   #fill -8 -2 -21 -8 -2 20 flowing_water 0 replace
+   #fill -8 2 -22 -8 2 21 flowing_water 0 replace
+   #fill -8 6 -22 -8 6 21 flowing_water 0 replace
+   #fill 8 -2 -22 8 -2 21 flowing_water 0 replace
+   #fill 8 2 -22 8 2 21 flowing_water 0 replace
+   #fill 8 6 -22 8 6 21 flowing_water 0 replace
 }
 
 
+function summon {
+   sendkeys "summon $1 $[oX+$2] $[oY+3] $[oZ+$4] $5"
+}
+
 clearAllBlocks
-buildLowerPlatform
-buildCover 3
-buildCenterCover
-buildVillagerPens
-summonVillagers
-buildGolemChute
-buildGolemDropHandler
-createlowervillages
-repositionvillagerpens
-buildCover 7
-buildUpperPlatform
-createuppervillages
+#buildLowerPlatform
+#buildCover 3
+#buildCenterCover
+#buildVillagerPens
+#summonVillagers
+#buildGolemChute
+#buildGolemDropHandler
+#createlowervillages
+#repositionvillagerpens
+#buildCover 7
+#buildUpperPlatform
+#createuppervillages
 createspawnplatforms
+
 
 sendkeys "me Finished building the Iron Titan"
 echo AllDone
