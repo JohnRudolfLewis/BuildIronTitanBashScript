@@ -20,8 +20,8 @@ function clearAllBlocks {
    sendkeys "me Clearing away the area"
    for ((Y = -27; Y < 11; Y++))
    do 
+      #fill -66 $Y -26 22 $Y 25 stone 0 replace
       fill -66 $Y -26 22 $Y 25 air 0 replace
-      #fill 0 $Y -16 22 $Y 15 air 0 replace
    done
 }
 
@@ -235,7 +235,7 @@ function buildGolemDropHandler {
    setblock 0 -24 11 golden_rail
    setblock 1 -24 11 golden_rail
    setblock 2 -24 11 iron_block
-   summon MinecartHopper 1 -24 11 "{Motion:[1.0,0.0,0.0]}"
+   summon MinecartHopper 1 -23 11 "{Motion:[1.0,0.0,0.0]}"
    setblock -3 -24 11 lever 10
    setblock 2 -26 11 hopper 2
    setblock 1 -26 11 hopper 5
@@ -258,7 +258,11 @@ function buildGolemDropHandler {
    setblock 0 -21 4 hopper 0 "{Items:[{Slot:0,id:red_flower,Count:64},{Slot:1,id:red_flower,Count:64},{Slot:2,id:red_flower,Count:64},{Slot:3,id:red_flower,Count:64},{Slot:4,id:red_flower,Count:64}]}"
    setblock 0 -22 4 hopper 2  "{Items:[{Slot:0,id:red_flower,Count:64},{Slot:1,id:red_flower,Count:64},{Slot:2,id:red_flower,Count:64},{Slot:3,id:red_flower,Count:64},{Slot:4,id:red_flower,Count:64}]}"
    setblock 0 -22 3 dispenser 2
-   
+  
+   #temporary hopper above dispenser
+   setblock 0 -21 3 hopper 0
+   setblock 0 -20 3 chest 2 replace "{Items:[{Slot:0,id:stone,Count:64},{Slot:1,id:stone,Count:64},{Slot:2,id:stone,Count:64},{Slot:3,id:stone,Count:64},{Slot:4,id:stone,Count:64},{Slot:5,id:stone,Count:64},{Slot:6,id:stone,Count:64},{Slot:7,id:stone,Count:64},{Slot:8,id:stone,Count:64},{Slot:9,id:stone,Count:64},{Slot:10,id:stone,Count:64},{Slot:11,id:stone,Count:64},{Slot:12,id:stone,Count:64},{Slot:13,id:stone,Count:64},{Slot:14,id:stone,Count:64},{Slot:15,id:stone,Count:64},{Slot:16,id:stone,Count:64},{Slot:17,id:stone,Count:64},{Slot:18,id:stone,Count:64},{Slot:19,id:stone,Count:64},{Slot:20,id:stone,Count:64},{Slot:21,id:stone,Count:64},{Slot:22,id:stone,Count:64},{Slot:23,id:stone,Count:64},{Slot:24,id:stone,Count:64},{Slot:25,id:stone,Count:64},{Slot:26,id:stone,Count:64}]}"
+ 
    # platform and redstone for dispenser
    fill -3 -23 3 3 -23 5 iron_block 0 replace 
    setblock -1 -22 3 iron_block
@@ -423,7 +427,7 @@ function setblock {
 
 function placedoor {
    setblock $1 $2 $3 wooden_door 0 replace
-   sleep 0.1
+   #sleep 0.1
    setblock $1 $[1+$2] $3 wooden_door 8 replace
 }
 
@@ -547,7 +551,11 @@ function repositionvillagerpens {
 
 function createspawnplatforms {
    # clear out temporary blocks
-   fill -9 0 -25 9 10 24 air 0 replace
+   fill -9 0 -25 9 2 24 air 0 replace
+   fill -9 5 -25 9 10 24 air 0 replace
+   fill -8 3 0 8 4 0 air 0 replace
+   fill -9 3 -25 9 4 -1 air 0 replace
+   fill -9 3 1 9 4 24 air 0 replace
 
    # platforms
    fill -9 5 -24 9 5 23 stone_slab 8 replace
@@ -589,6 +597,9 @@ function createspawnplatforms {
    fill 10 6 16 10 6 24 stone 0 replace
    fill 10 6 16 10 6 24 stone 0 replace
 
+   fill 10 -2 -25 10 -2 24 stone 0 replace
+   fill -10 -2 -25 -10 -2 24 stone 0 replace
+   
    setblock -10 -1 -25 iron_bars 0 replace
    setblock -9 -1 -25 iron_bars 0 replace
    setblock -10 -1 -24 iron_bars 0 replace
@@ -657,16 +668,42 @@ function createspawnplatforms {
    fill -7 -2 -24 7 -2 -24 flowing_water 0 replace
    fill -7 2 -24 7 2 -24 flowing_water 0 replace
    fill -7 6 -24 7 6 -24 flowing_water 0 replace
-   fill -7 -2 23 7 -2 -24 flowing_water 0 replace
-   fill -7 2 23 7 2 -24 flowing_water 0 replace
-   fill -7 6 23 7 6 -24 flowing_water 0 replace
    
-   #fill -8 -2 -21 -8 -2 20 flowing_water 0 replace
-   #fill -8 2 -22 -8 2 21 flowing_water 0 replace
-   #fill -8 6 -22 -8 6 21 flowing_water 0 replace
-   #fill 8 -2 -22 8 -2 21 flowing_water 0 replace
-   #fill 8 2 -22 8 2 21 flowing_water 0 replace
-   #fill 8 6 -22 8 6 21 flowing_water 0 replace
+   fill -7 -2 23 7 -2 23 flowing_water 0 replace
+   fill -7 2 23 7 2 23 flowing_water 0 replace
+   fill -7 6 23 7 6 23 flowing_water 0 replace
+   
+   fill -9 -2 -21 -9 -2 20 flowing_water 0 replace
+   fill -9 2 -22 -9 2 21 flowing_water 0 replace
+   fill -9 6 -22 -9 6 21 flowing_water 0 replace
+   fill 9 -2 -22 9 -2 21 flowing_water 0 replace
+   fill 9 2 -22 9 2 21 flowing_water 0 replace
+   fill 9 6 -22 9 6 21 flowing_water 0 replace
+
+   fill -2 -3 -17 2 -3 16 double_stone_slab 0 replace
+   fill -2 -7 -17 2 -7 12 iron_block 0 replace
+   fill -2 -6 -17 2 -4 12 stained_glass 0 replace
+   fill -2 -6 -14 2 -4 -14 sea_lantern 0 replace
+   fill -2 -6 -5 2 -4 -5 sea_lantern 0 replace
+   fill -2 -6 4 2 -4 4 sea_lantern 0 replace
+   fill -1 -6 -16 1 -3 15 air 0 replace
+   fill -1 -7 12 1 -7 5 stained_glass 0 replace
+   fill -1 -7 3 1 -7 -4 stained_glass 0 replace
+   fill -1 -7 -6 1 -7 -13 stained_glass 0 replace
+   fill -1 -7 -15 1 -7 -17 stained_glass 0 replace
+   setblock -1 -6 -14 heavy_weighted_pressure_plate 0 replace
+   setblock 0 -6 -14 heavy_weighted_pressure_plate 0 replace
+   setblock 1 -6 -14 heavy_weighted_pressure_plate 0 replace
+   setblock -1 -6 -5 heavy_weighted_pressure_plate 0 replace
+   setblock 0 -6 -5 heavy_weighted_pressure_plate 0 replace
+   setblock 1 -6 -5 heavy_weighted_pressure_plate 0 replace
+   setblock -1 -6 4 heavy_weighted_pressure_plate 0 replace
+   setblock 0 -6 4 heavy_weighted_pressure_plate 0 replace
+   setblock 1 -6 4 heavy_weighted_pressure_plate 0 replace
+   fill -1 -6 -16 1 -6 -16 flowing_water 0 replace
+   fill -1 -6 -13 1 -6 -13 flowing_water 0 replace
+   fill -1 -6 -4 1 -6 -4 flowing_water 0 replace
+   fill -1 -6 5 1 -6 5 flowing_water 0 replace
 }
 
 
@@ -674,19 +711,19 @@ function summon {
    sendkeys "summon $1 $[oX+$2] $[oY+3] $[oZ+$4] $5"
 }
 
-clearAllBlocks
-#buildLowerPlatform
-#buildCover 3
-#buildCenterCover
-#buildVillagerPens
-#summonVillagers
-#buildGolemChute
-#buildGolemDropHandler
-#createlowervillages
-#repositionvillagerpens
-#buildCover 7
-#buildUpperPlatform
-#createuppervillages
+#clearAllBlocks
+buildLowerPlatform
+buildCover 3
+buildCenterCover
+buildVillagerPens
+summonVillagers
+buildGolemChute
+buildGolemDropHandler
+createlowervillages
+repositionvillagerpens
+buildCover 7
+buildUpperPlatform
+createuppervillages
 createspawnplatforms
 
 
